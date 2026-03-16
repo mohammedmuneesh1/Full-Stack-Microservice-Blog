@@ -1,0 +1,14 @@
+
+
+
+
+
+
+await invalidateCacheJob(["blogs:*"])
+
+
+
+
+What does blogs:* mean in Redis?
+
+* is a glob wildcard, not regex.
