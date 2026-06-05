@@ -32,9 +32,13 @@ export const startCacheConsumer = async ()=>{
 
         //=================================== consume 👉 Messages are handled one by one by default.  ===================================
         channel.consume(queueName, async (message) => {
+
             if(message){
                 try {
                     const content = JSON.parse(message.content.toString()) as CacheInvalidationMessage;
+                 //content will be look like {action:'invalidateCache', keys:["blogs:*",`blogById:${blogId}`] }
+
+
                     console.log('📩 blog service received cache invalidation message',content);
                     if(content.action === 'invalidateCache'){
                         for (const pattern of content.keys) {
@@ -43,9 +47,6 @@ export const startCacheConsumer = async ()=>{
                             //content.keys will be an array  
                             const keys = await redisClientConfig.keys(pattern);
                             //the result of keys [ "blogs:","blogs:tech","blogs:sports","blogs:search:react","blogs::category:js"]
-                            
-
-
 
                             if(keys.length > 0){
                                 await redisClientConfig.del(keys);
@@ -56,7 +57,7 @@ export const startCacheConsumer = async ()=>{
                                 const cacheKey = `blogs:${searchQuery}:${category}`;
                                 const blogs = await sql `SELECT * FROM blogs ORDER BY createdAt DESC  `;
                                 await redisClientConfig.set(cacheKey,JSON.stringify(blogs),{
-                                    EX:3600,
+                                    EX:3600, // expires in 1 hour
                                 });
                                 console.log('🔄️ Cache rebuilt with key:',cacheKey);
                             }

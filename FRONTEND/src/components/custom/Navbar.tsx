@@ -35,7 +35,7 @@ const Navbar = () => {
              >
 
                 <li ><Link href={"/"} className="hover:text-blue-500 " >Home</Link></li>
-                <li ><Link href={"/blog/saved"} className="hover:text-blue-500 " >Saved Blogs</Link></li>
+                <li ><Link href={"/blogs/saved"} className="hover:text-blue-500 " >Saved Blogs</Link></li>
                 {
                     isAuth ? (
                         <li ><Link href={"/profile"} className="hover:text-blue-500 " >profile</Link></li>

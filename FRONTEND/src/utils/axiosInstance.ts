@@ -99,7 +99,6 @@ export default axiosInstance;
 //     }
 // });
 
-// console.log('process.env.BASE_URL',process.env.BASE_URL);
 
 // axiosInstance.interceptors.request.use(async (config) => {
 //     // const token = localStorage.getItem("token");

@@ -1,0 +1,6 @@
+
+command to run docker
+PS C:\Users\mohammed muneesh E K> docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
+
+
+d3c9fb2130045c6120464f8d9f11841bebc5ea68c3a55ec810e82cafd72fb64b

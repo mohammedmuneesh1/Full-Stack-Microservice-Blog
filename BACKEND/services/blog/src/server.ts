@@ -27,7 +27,6 @@ if(!process.env.REDIS_URL) {
 
 app.use((req:Request, res:Response, next:NextFunction) => {
   console.log(`[${req.method}] ${req.originalUrl},`);
-  
   next();
 });
 app.use('/api/blogs',BlogRoutes);

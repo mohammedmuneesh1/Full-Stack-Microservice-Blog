@@ -14,6 +14,7 @@ export interface AppcontextInterface{
     isAuth:boolean | null;
     setIsAuth:React.Dispatch<React.SetStateAction<boolean | null>>;
     fetchUser:()=>Promise<void>;
+    logoutFn:()=>void;
 
 
 }
@@ -35,16 +36,15 @@ const AppContextProvider = ({children}:{children:React.ReactNode})=>{
     async function fetchUser(){
         try {
             const token = Cookies.get('token');
+            // console.log('token found here',token);
             if(token){
                 const res = await FETCH_USER_PROFILE();
-                console.log('res',res);
                 if(res?.success){
                     setUser(res?.data);
                     setIsAuth(true);
                 }
             }
         } catch (error) {
-            console.log(error);
             setIsAuth(false); 
             setUser(null);  
         }
@@ -59,13 +59,19 @@ const AppContextProvider = ({children}:{children:React.ReactNode})=>{
 
     function checkAuthenticated(){
         const token = Cookies.get('token');
-        console.log('token found here',token);
         if(token){
             setIsAuth(true);
         }
         else{
             setIsAuth(false);
         }
+    }
+
+
+    const logoutFn = ()=>{
+        Cookies.remove('token');
+        setIsAuth(false);
+        setUser(null);
     }
 
     useEffect(()=>{
@@ -79,7 +85,8 @@ const AppContextProvider = ({children}:{children:React.ReactNode})=>{
     user,setUser,
     loading,setLoading,
     isAuth,setIsAuth,
-    fetchUser
+    fetchUser,
+    logoutFn
     }}>
    {children}
 </Appcontext.Provider>
@@ -118,6 +125,7 @@ export interface UserInterface{
         url:string,
         publicId:string
     }
+    createdAt?:string;
 }
 
 
@@ -130,4 +138,4 @@ export interface BlogInterface{
     category:string;
     author:string;
     createdAt:string;
-}
+} 

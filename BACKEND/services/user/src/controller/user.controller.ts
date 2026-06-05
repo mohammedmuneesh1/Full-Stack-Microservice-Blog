@@ -15,7 +15,8 @@ import axios from 'axios';
 
 
 export const USER_LOGIN_FN = async(req:Request,res:Response)=>{
-
+       
+    console.log("final request reached here");
         const {code } = req.body;
         if(!code){
             return ResponseHandler(res,200,false,null,'Code not found');
@@ -150,10 +151,12 @@ export async function GET_USER_PROFILE_BY_ID(req:AuthenticatedRequest, res:Respo
 export async function UPDATE_USER_PROFILE_BY_ID(req:AuthenticatedRequest, res:Response) {
     
     const data = req.body;
-    const id = req.params.id;
-    if(!mongoIdValidate(id)) {
-        return ResponseHandler(res,401,true,null,'User profile fetched successfully');
-    }
+    // const id = req.params.id;
+    const user = req.user;
+    // console.log('user',user)
+    // if(!mongoIdValidate(id)) {
+    //     return ResponseHandler(res,401,true,null,'User profile fetched successfully');
+    // }
     const updatingData = {
   ...(data?.name !== undefined && { name: data.name }),
   ...(data?.image !== undefined && { image: data.image }),
@@ -166,7 +169,7 @@ export async function UPDATE_USER_PROFILE_BY_ID(req:AuthenticatedRequest, res:Re
 
 
      const updatedUser = await UserModel.findOneAndUpdate(
-     { _id: new mongoose.Types.ObjectId(id), },
+     { _id: new mongoose.Types.ObjectId(user?.id), },
       updatingData,
      { new: true } // return the updated document
 ).select('-__v -updatedAt');

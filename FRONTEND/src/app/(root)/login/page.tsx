@@ -33,11 +33,11 @@ const LoginPage = () => {
   const router = useRouter();
   const {isAuth ,setLoading,setIsAuth,fetchUser} = useAppcontext();
 
-  useEffect(() => {
-    if (isAuth === true) {
-      router.push("/");
-    }
-  }, [isAuth, router]);
+  // useEffect(() => {
+  //   if (isAuth === true) {
+  //     router.push("/");
+  //   }
+  // }, [isAuth, router]);
 
 
 
@@ -67,6 +67,7 @@ const googleLogin = useGoogleLogin({
         // router.push("/user/dashboard/bookings");
         // }
         toast.success("Welcome Back");
+        return router.push("/profile");
     }
     else{
         toast.error(res?.data?.response ?? "Technical Issue in login. Please try again later.");

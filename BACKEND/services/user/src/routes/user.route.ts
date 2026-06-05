@@ -11,7 +11,7 @@ import createUploadMulter from '../middleware/multer.js';
    createUploadMulter().single('image'),
    tryCatch(UPDATE_USER_PROFILE_PIC)
 );
- router.route('/profile/:id').put(isAuth,tryCatch(UPDATE_USER_PROFILE_BY_ID));
+ router.route('/profile').put(isAuth,tryCatch(UPDATE_USER_PROFILE_BY_ID));
  router.route('/login').post(tryCatch(USER_LOGIN_FN));
  router.route('/profile').get(isAuth,tryCatch(MY_PROFILE));
  router.route('/u-profile/:id').get(isAuth,tryCatch(GET_USER_PROFILE_BY_ID));

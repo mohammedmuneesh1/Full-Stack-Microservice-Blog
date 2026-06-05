@@ -7,7 +7,7 @@ if (!process.env.REDIS_URL) {
 }
 
 export const redisClientConfig =  createClient({
-  url: process.env.REDIS_URL as string,
+url: process.env.REDIS_URL as string,
 });
 
 redisClientConfig.connect().then(()=>{

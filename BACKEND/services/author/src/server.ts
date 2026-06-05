@@ -76,13 +76,7 @@ async function initDB(){
 
       await sql `
     CREATE TABLE IF NOT EXISTS comments(
-      id SERIAL PRIMARY KEY,    
-      comment VARCHAR(255) NOT NULL,
-      userId VARCHAR(255) NOT NULL,
-      username TEXT NOT NULL,
-      blogId VARCHAR(255) NOT NULL,
-      createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      updatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+     
       )`
       
 

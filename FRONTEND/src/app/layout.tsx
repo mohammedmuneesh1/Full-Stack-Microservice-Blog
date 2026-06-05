@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+//eslint-disable-next-line
 import "./globals.css";
 import Navbar from "@/components/custom/Navbar";
 import AppContextProvider from "@/context/AppContext";
